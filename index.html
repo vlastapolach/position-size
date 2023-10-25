@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Position Size Calculator</title>
+		<link rel="stylesheet" href="./style.css?v=1">
+		<link rel="shortcut icon" href="./favicon.ico">
+		<meta name="robots" content="noindex, nofollow">
+</head>
+	<meta charset="UTF-8">
+</head>
+<body>
+
+	<main>
+		<h1>EUR/USD</h1>
+
+		<label for="risk">Risk: </label>
+		<input type="tel" id="risk" class="risk" value="50" maxlength="3"><span>USD</span><br><br>
+
+		<label for="stopLoss">Stop Loss Distance:</label>
+		<div class="input-group">
+			<input type="tel" id="stopLossWhole" class="digits" maxlength="2" oninput="moveFocus()">
+			<span>.</span>
+			<input type="tel" id="stopLossDecimal" class="decimal" maxlength="1" oninput="calculatePositionSize()">
+		</div>
+		<br>
+
+		<div id="result"></div><br>
+
+		<button id="resetButton" onclick="resetInputs()">Reset</button>
+	</main>
+
+	<script type="text/javascript">
+		document.getElementById('stopLossWhole').focus();
+
+		function moveFocus() {
+			var wholePart = document.getElementById('stopLossWhole');
+			if (wholePart.value.length == 2) {
+				document.getElementById('stopLossDecimal').focus();
+			}
+		}
+
+		function calculatePositionSize() {
+			var riskAmount = document.getElementById("risk").value;
+			var stopLossWhole = document.getElementById("stopLossWhole").value;
+			var stopLossDecimal = document.getElementById("stopLossDecimal").value;
+			if (stopLossDecimal.length == 1) {
+				var stopLossDistance = parseFloat(stopLossWhole + '.' + stopLossDecimal);
+				var pipValue = 10;
+
+				var positionSize = ((riskAmount / stopLossDistance) * pipValue) * 1000;
+				var standardLots = (positionSize / 100000).toFixed(2);
+				
+				document.getElementById("result").innerHTML =
+					"Position Size: <strong>" + standardLots + "</strong> standard lots";
+
+				document.getElementById('resetButton').focus();
+			}
+		}
+
+		function resetInputs() {
+			document.getElementById('stopLossWhole').value = '';
+			document.getElementById('stopLossDecimal').value = '';
+			document.getElementById('result').innerHTML = '';
+			document.getElementById('stopLossWhole').focus();
+		}
+	</script>
+
+</body>
+</html>

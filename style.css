@@ -1,0 +1,97 @@
+:root {
+	--color-white: #ffffff;
+	--color-light-bg: #fcfcfc;
+	--color-gray: #333333;
+	--color-dark-bg: #3c3c3c;
+	--color-blue: #3e29fa;
+	--color-purple: #b8b0ff;
+}
+
+html {
+	font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 1.2rem;
+}
+
+main {
+	padding: 1rem;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 1.6rem;
+	margin-top: 0;
+}
+
+input[type=tel] {
+	border: 1px solid var(--color-gray);
+	font-size: 1.2rem;
+	padding: .5rem;
+}
+
+.input-group {
+	display: flex;
+	align-items: flex-end;
+}
+
+input.digits,
+input.risk {
+	width: 2em;
+	margin-right: 0.25em;
+}
+
+input.decimal {
+	width: 1em;
+}
+
+button {
+	border: 1px solid var(--color-gray);
+	font-size: 1.2rem;
+	padding: .5rem;
+}
+
+
+/* Styles for light mode */
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: var(--color-white);
+		color: var(--color-gray);
+	}
+
+	a {
+		color: var(--color-blue);
+	}
+
+	.question {
+		border-color: #ddd;
+		background-color: var(--color-light-bg);
+	}
+
+	input[type=checkbox]:checked + label::after { 
+		background-color: var(--color-white);
+	}
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: var(--color-gray);
+		color: var(--color-white);
+	}
+
+	a {
+		color: var(--color-purple);
+	}
+
+	input[type=tel] { 
+		background-color: var(--color-dark-bg);
+		color: var(--color-white);
+	}
+}
